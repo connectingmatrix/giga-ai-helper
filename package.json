@@ -4,6 +4,25 @@
   "description": "Shared helper utilities for Giga AI services.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "giga-auth": [
+        "dist/giga-auth/index.d.ts"
+      ],
+      "chunking": [
+        "dist/chunking/index.d.ts"
+      ],
+      "embeddings": [
+        "dist/embeddings/index.d.ts"
+      ],
+      "embedding": [
+        "dist/embeddings/index.d.ts"
+      ],
+      "serp-search": [
+        "dist/serp-search/index.d.ts"
+      ]
+    }
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
