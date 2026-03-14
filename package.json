@@ -1,0 +1,35 @@
+{
+  "name": "giga-ai-helper",
+  "version": "1.0.0",
+  "description": "Shared helper utilities for Giga AI services.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc -p tsconfig.json",
+    "prepare": "yarn build"
+  },
+  "keywords": [
+    "giga",
+    "ai",
+    "helper",
+    "typescript"
+  ],
+  "author": "Muhammad Abeer",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "mammoth": "^1.11.0",
+    "mime-db": "^1.54.0",
+    "pdf-parse": "^2.4.5"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.20",
+    "@types/node": "^25.0.3",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.3"
+  }
+}
