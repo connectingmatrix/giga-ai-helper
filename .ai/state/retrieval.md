@@ -1,6 +1,6 @@
 # Retrieval Index: ai-helper
 
-- Generated: 2026-03-25T10:01:13.359Z
+- Generated: 2026-04-05T12:06:39.320Z
 - Repo path: `giga/ai-helper`
 - Package manager: `yarn`
 - Validations:
@@ -21,6 +21,7 @@
 - When docs or generated context are stale, run `./.ai/bin/ai-context-build` before deeper implementation work.
 - Keep the PortableCoder brain as the default route. Any Codex-backed execution must be explicitly unlocked for the current thread with `/brain allow codex`.
 - After meaningful changes, run `./.ai/bin/ai-sync`.
+- When a written plan is implemented, export that plan markdown to `~/dev/codex-plan/ai-helper/[PLAN HEADING]-DATE-.md` and keep the original plan date in frontmatter and file timestamps.
 - After prompt, standards, or memory updates, run `./.ai/bin/ai-memory-build`.
 - On failures or broken validation, run `./.ai/bin/ai-repair`.
 - If local-model features fail, run `cd /Users/abeer/dev/PortableCoder && ./tools/brain doctor` first.
@@ -49,7 +50,8 @@
 - Failures must capture symptom, root cause, attempted fix, and validation result.
 - Repeated successful solutions should be promoted into pattern memory.
 - Major architecture or workflow choices should be recorded in decision memory.
-- Local prompts and generated context under `.ai/` should stay aligned with shared brain memory.
+- Local prompts and generated context under `.ai/` 
+...
 
 ## README
 
@@ -116,14 +118,12 @@ import {
 Use `normalize` to map incoming records into class-shaped objects with implicit key normalizing and safe type coercion.
 
 ```ts
-import { normalize, NormalizeField } from 'giga-ai-helper';
+import { normalize } from 'giga-ai-helper';
 
 class OrgRestriction {
   organizationId: string | null = null;
   userId: string | null = null;
   reason: string | null = null;
-
-  @NormalizeField('created_at')
   createdAt: string | null = null;
 }
 
@@ -131,9 +131,9 @@ const normalized = normalize(row, OrgRestriction);
 ```
 
 By default:
-- string fields are trimmed and become `null` when empty/invalid (`toOptionalString`)
+- string fields are trimmed and become `null` when empty/invalid (`toOptionalString` behavior)
 - boolean fields are normalized via `toSafeBoolean`
-- unknown keys are camel-cased (`created_at` → `createdAt`) unless mapped with `@NormalizeField`
+- unknown keys are camel-cased (`created_at` → `createdAt`)
 
 ## package.json
 
@@ -306,14 +306,12 @@ import {
 Use `normalize` to map incoming records into class-shaped objects with implicit key normalizing and safe type coercion.
 
 ```ts
-import { normalize, NormalizeField } from 'giga-ai-helper';
+import { normalize } from 'giga-ai-helper';
 
 class OrgRestriction {
   organizationId: string | null = null;
   userId: string | null = null;
   reason: string | null = null;
-
-  @NormalizeField('created_at')
   createdAt: string | null = null;
 }
 
@@ -321,7 +319,8 @@ const normalized = normalize(row, OrgRestriction);
 ```
 
 By default:
-- string fields are trimmed and become `null` when empty/invalid (`toOptional
+- string fields are trimmed and become `null` when empty/invalid (`toOptionalString` behavior)
+- boolean fields are normalized
 ...
 
 ### Item 2
@@ -341,6 +340,7 @@ File: AGENTS.md
 - When docs or generated context are stale, run `./.ai/bin/ai-context-build` before deeper implementation work.
 - Keep the PortableCoder brain as the default route. Any Codex-backed execution must be explicitly unlocked for the current thread with `/brain allow codex`.
 - After meaningful changes, run `./.ai/bin/ai-sync`.
+- When a written plan is implemented, export that plan markdown to `~/dev/codex-plan/ai-helper/[PLAN HEADING]-DATE-.md` and keep the original plan date in frontmatter and file timestamps.
 - After prompt, standards, or memory updates, run `./.ai/bin/ai-memory-build`.
 - On failures or broken validation, run `./.ai/bin/ai-repair`.
 - If local-model features fail, run `cd /Users/abeer/dev/PortableCoder && ./tools/brain doctor` first.
@@ -359,14 +359,7 @@ File: AGENTS.md
 - Prefer minimal fixes that align with stored decisions and existing patterns.
 - Record root cause, fix path, and validation outcome after repair work.
 
-## Validation Expectations
-
-- `yarn build`
-
-## Memory Usage Rules
-
-- Summaries belong in shared project memory after meaningful work.
-- Failures must capture symptom, root cause, attempted fix, and validation
+## Validation Expect
 ...
 
 
@@ -394,6 +387,7 @@ File: AGENTS.md
 - `.continue/config.yaml`
 - `.continue/rules/`
 - `.continue/rules/portable-brain.md`
+- `.DS_Store`
 - `.gitignore`
 - `AGENTS.md`
 - `package.json`
@@ -450,6 +444,48 @@ File: AGENTS.md
 ### Item 1
 
 ---
+id: ai-helper--ec6b735c-20260405T120638Z-summary
+type: summary
+project: ai-helper--ec6b735c
+timestamp: 2026-04-05T12:06:38.573Z
+branch: main
+commit: 2d2d2235cd2df229cfa15a48565ec52743e2cf27
+summary: Updated AGENTS and brain prompts with codex plan export rules.
+tags: sync
+files: ai/prompts/preflight.md, .ai/prompts/summary.md, .ai/state/architecture-context.md, .ai/state/codex-context.md, .ai/state/retrieval.md, AGENTS.md, package.json
+relatedCommit: 2d2d2235cd2df229cfa15a48565ec52743e2cf27
+---
+
+# Meaningful change summary
+
+Updated AGENTS and brain prompts with codex plan export rules.
+
+- 
+...
+
+### Item 2
+
+---
+id: ai-helper--ec6b735c-20260405T120638Z-summary
+type: summary
+project: ai-helper--ec6b735c
+timestamp: 2026-04-05T12:06:38.797Z
+branch: main
+commit: 2d2d2235cd2df229cfa15a48565ec52743e2cf27
+summary: Synchronized Codex thread 019d5d7b-ae9e-7ee2-aab7-416a8648f3d1 into shared project memory.
+tags: codex-sync, session-sync
+files: /Users/abeer/dev/giga/ai-helper, /Users/abeer/dev/giga/ai-helper/AGENTS.md, /Users/abeer/dev/giga/ai-helper/.ai/prompts/preflight.md, /Users/abeer/dev/giga/ai-helper/.ai/prompts/summary.md
+relatedCommit: 
+---
+
+# Codex session sync
+
+Codex session `019d5d7b-ae9e-7ee2-aa
+...
+
+### Item 3
+
+---
 id: ai-helper--ec6b735c-20260325T095720Z-summary
 type: summary
 project: ai-helper--ec6b735c
@@ -467,7 +503,7 @@ relatedCommit:
 Codex session `019d2452-c699-7603-953f-ca7109ce
 ...
 
-### Item 2
+### Item 4
 
 ---
 id: ai-helper--ec6b735c-20260325T095719Z-summary
@@ -489,52 +525,30 @@ PortableCoder synchronized the current repo state.
 - Changed files: EADME.md, src/normalize-utils.ts, .ai/, .continue/, AGENTS.md, src/workflow/v
 ...
 
-### Item 3
-
----
-id: ai-helper--ec6b735c-20260325T095627Z-summary
-type: summary
-project: ai-helper--ec6b735c
-timestamp: 2026-03-25T09:56:27.993Z
-branch: main
-commit: ff19de3693aab13d559cc3b219f6b7ca54f8d66d
-summary: Synchronized Codex thread 019d2452-c699-7603-953f-ca7109ce705a into shared project memory.
-tags: codex-sync, session-sync
-files: /Users/abeer/dev/giga/ai-helper, /Users/abeer/dev/giga/ai-helper</cwd>, /Users/abeer/dev/giga/ai-helper/src/normalize-utils.ts, /Users/abeer/dev/giga/ai-helper/src/safe-utils.ts
-relatedCommit: 
----
-
-# Codex session sync
-
-Codex session `019d2452-c699-7603-953f-ca7109ce
-...
-
-### Item 4
-
----
-id: ai-helper--ec6b735c-20260325T095626Z-summary
-type: summary
-project: ai-helper--ec6b735c
-timestamp: 2026-03-25T09:56:26.847Z
-branch: main
-commit: ff19de3693aab13d559cc3b219f6b7ca54f8d66d
-summary: Synchronized current repo state into shared project memory.
-tags: sync
-files: EADME.md, src/normalize-utils.ts, .ai/, .continue/, AGENTS.md, src/workflow/value-utils.ts
-relatedCommit: ff19de3693aab13d559cc3b219f6b7ca54f8d66d
----
-
-# Auto sync summary
-
-PortableCoder synchronized the current repo state.
-
-- Changed files: EADME.md, src/normalize-utils.ts, .ai/, .continue/, AGENTS.md, src/workflow/v
-...
-
 
 ## Recent Transcripts
 
 ### Item 1
+
+---
+id: ai-helper--ec6b735c-20260405T120638Z-transcript
+type: transcript
+project: ai-helper--ec6b735c
+timestamp: 2026-04-05T12:06:38.769Z
+branch: main
+commit: 2d2d2235cd2df229cfa15a48565ec52743e2cf27
+summary: Captured the complete chronological user and Codex conversation for this thread.
+tags: codex-sync, transcript
+files: /Users/abeer/dev/giga/ai-helper, /Users/abeer/dev/giga/ai-helper/AGENTS.md, /Users/abeer/dev/giga/ai-helper/.ai/prompts/preflight.md, /Users/abeer/dev/giga/ai-helper/.ai/prompts/summary.md
+relatedCommit: 
+---
+
+# Codex thread transcript
+
+Codex thread transcript for `019d5d7b
+...
+
+### Item 2
 
 ---
 id: ai-helper--ec6b735c-20260325T095720Z-transcript
@@ -554,29 +568,29 @@ relatedCommit:
 Codex thread transcript for `019d2452-c699-7603-
 ...
 
-### Item 2
-
----
-id: ai-helper--ec6b735c-20260325T095627Z-transcript
-type: transcript
-project: ai-helper--ec6b735c
-timestamp: 2026-03-25T09:56:27.837Z
-branch: main
-commit: ff19de3693aab13d559cc3b219f6b7ca54f8d66d
-summary: Captured the complete chronological user and Codex conversation for this thread.
-tags: codex-sync, transcript
-files: /Users/abeer/dev/giga/ai-helper, /Users/abeer/dev/giga/ai-helper</cwd>, /Users/abeer/dev/giga/ai-helper/src/normalize-utils.ts, /Users/abeer/dev/giga/ai-helper/src/safe-utils.ts
-relatedCommit: 
----
-
-# Codex thread transcript
-
-Codex thread transcript for `019d2452-c699-7603-
-...
-
 ## Patterns
 
 ### Item 1
+
+---
+id: ai-helper--ec6b735c-20260405T120638Z-pattern
+type: pattern
+project: ai-helper--ec6b735c
+timestamp: 2026-04-05T12:06:38.851Z
+branch: main
+commit: 2d2d2235cd2df229cfa15a48565ec52743e2cf27
+summary: Captured repeatable workflow patterns from the Codex thread.
+tags: codex-sync, pattern
+files: /Users/abeer/dev/giga/ai-helper, /Users/abeer/dev/giga/ai-helper/AGENTS.md, /Users/abeer/dev/giga/ai-helper/.ai/prompts/preflight.md, /Users/abeer/dev/giga/ai-helper/.ai/prompts/summary.md
+relatedCommit: 
+---
+
+# Codex session working patterns
+
+- - Continue + Ollama are secondary helpers and must follow
+...
+
+### Item 2
 
 ---
 id: ai-helper--ec6b735c-20260325T095720Z-pattern
@@ -596,7 +610,7 @@ relatedCommit:
 - - Continue + Ollama are secondary helpers and must follow the same r
 ...
 
-### Item 2
+### Item 3
 
 ---
 id: ai-helper--ec6b735c-20260325T095628Z-pattern
@@ -616,7 +630,7 @@ relatedCommit:
 - - Continue + Ollama are secondary helpers and must follow the same r
 ...
 
-### Item 3
+### Item 4
 
 ---
 id: ai-helper--ec6b735c-20260325T095616Z-pattern
@@ -636,29 +650,29 @@ relatedCommit:
 - - Continue + Ollama are secondary helpers and must follow the same r
 ...
 
-### Item 4
-
----
-id: ai-helper--ec6b735c-20260325T095556Z-pattern
-type: pattern
-project: ai-helper--ec6b735c
-timestamp: 2026-03-25T09:55:56.130Z
-branch: main
-commit: ff19de3693aab13d559cc3b219f6b7ca54f8d66d
-summary: Captured repeatable workflow patterns from the Codex thread.
-tags: codex-sync, pattern
-files: /Users/abeer/dev/giga/ai-helper, /Users/abeer/dev/giga/ai-helper</cwd>, /Users/abeer/dev/giga/ai-helper/src/normalize-utils.ts, /Users/abeer/dev/giga/ai-helper/src/safe-utils.ts
-relatedCommit: 
----
-
-# Codex session working patterns
-
-- - Continue + Ollama are secondary helpers and must follow the same r
-...
-
 ## Decisions
 
 ### Item 1
+
+---
+id: ai-helper--ec6b735c-20260405T120638Z-decision
+type: decision
+project: ai-helper--ec6b735c
+timestamp: 2026-04-05T12:06:38.825Z
+branch: main
+commit: 2d2d2235cd2df229cfa15a48565ec52743e2cf27
+summary: Captured explicit working rules and approved defaults from the Codex thread.
+tags: codex-sync, decision
+files: /Users/abeer/dev/giga/ai-helper, /Users/abeer/dev/giga/ai-helper/AGENTS.md, /Users/abeer/dev/giga/ai-helper/.ai/prompts/preflight.md, /Users/abeer/dev/giga/ai-helper/.ai/prompts/summary.md
+relatedCommit: 
+---
+
+# Codex session decisions
+
+- - Codex Studio is the authoritative control s
+...
+
+### Item 2
 
 ---
 id: ai-helper--ec6b735c-20260325T095720Z-decision
@@ -678,7 +692,7 @@ relatedCommit:
 - - Codex Studio is the authoritative control surface for 
 ...
 
-### Item 2
+### Item 3
 
 ---
 id: ai-helper--ec6b735c-20260325T095628Z-decision
@@ -698,33 +712,13 @@ relatedCommit:
 - - Codex Studio is the authoritative control surface for 
 ...
 
-### Item 3
+### Item 4
 
 ---
 id: ai-helper--ec6b735c-20260325T095616Z-decision
 type: decision
 project: ai-helper--ec6b735c
 timestamp: 2026-03-25T09:56:16.118Z
-branch: main
-commit: ff19de3693aab13d559cc3b219f6b7ca54f8d66d
-summary: Captured explicit working rules and approved defaults from the Codex thread.
-tags: codex-sync, decision
-files: /Users/abeer/dev/giga/ai-helper, /Users/abeer/dev/giga/ai-helper</cwd>, /Users/abeer/dev/giga/ai-helper/src/normalize-utils.ts, /Users/abeer/dev/giga/ai-helper/src/safe-utils.ts
-relatedCommit: 
----
-
-# Codex session decisions
-
-- - Codex Studio is the authoritative control surface for 
-...
-
-### Item 4
-
----
-id: ai-helper--ec6b735c-20260325T095555Z-decision
-type: decision
-project: ai-helper--ec6b735c
-timestamp: 2026-03-25T09:55:55.974Z
 branch: main
 commit: ff19de3693aab13d559cc3b219f6b7ca54f8d66d
 summary: Captured explicit working rules and approved defaults from the Codex thread.

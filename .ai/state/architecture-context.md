@@ -76,14 +76,12 @@ import {
 Use `normalize` to map incoming records into class-shaped objects with implicit key normalizing and safe type coercion.
 
 ```ts
-import { normalize, NormalizeField } from 'giga-ai-helper';
+import { normalize } from 'giga-ai-helper';
 
 class OrgRestriction {
   organizationId: string | null = null;
   userId: string | null = null;
   reason: string | null = null;
-
-  @NormalizeField('created_at')
   createdAt: string | null = null;
 }
 
@@ -91,7 +89,8 @@ const normalized = normalize(row, OrgRestriction);
 ```
 
 By default:
-- string fields are trimmed and become `null` when empty/invalid (`toOptional
+- string fields are trimmed and become `null` when empty/invalid (`toOptionalString` behavior)
+- boolean fields are normalized
 ...
 
 File: AGENTS.md
@@ -109,6 +108,7 @@ File: AGENTS.md
 - When docs or generated context are stale, run `./.ai/bin/ai-context-build` before deeper implementation work.
 - Keep the PortableCoder brain as the default route. Any Codex-backed execution must be explicitly unlocked for the current thread with `/brain allow codex`.
 - After meaningful changes, run `./.ai/bin/ai-sync`.
+- When a written plan is implemented, export that plan markdown to `~/dev/codex-plan/ai-helper/[PLAN HEADING]-DATE-.md` and keep the original plan date in frontmatter and file timestamps.
 - After prompt, standards, or memory updates, run `./.ai/bin/ai-memory-build`.
 - On failures or broken validation, run `./.ai/bin/ai-repair`.
 - If local-model features fail, run `cd /Users/abeer/dev/PortableCoder && ./tools/brain doctor` first.
@@ -127,12 +127,5 @@ File: AGENTS.md
 - Prefer minimal fixes that align with stored decisions and existing patterns.
 - Record root cause, fix path, and validation outcome after repair work.
 
-## Validation Expectations
-
-- `yarn build`
-
-## Memory Usage Rules
-
-- Summaries belong in shared project memory after meaningful work.
-- Failures must capture symptom, root cause, attempted fix, and validation
+## Validation Expect
 ...

@@ -11,6 +11,7 @@
 - When docs or generated context are stale, run `./.ai/bin/ai-context-build` before deeper implementation work.
 - Keep the PortableCoder brain as the default route. Any Codex-backed execution must be explicitly unlocked for the current thread with `/brain allow codex`.
 - After meaningful changes, run `./.ai/bin/ai-sync`.
+- When a written plan is implemented, export that plan markdown to `~/dev/codex-plan/ai-helper/[PLAN HEADING]-DATE-.md` and keep the original plan date in frontmatter and file timestamps.
 - After prompt, standards, or memory updates, run `./.ai/bin/ai-memory-build`.
 - On failures or broken validation, run `./.ai/bin/ai-repair`.
 - If local-model features fail, run `cd /Users/abeer/dev/PortableCoder && ./tools/brain doctor` first.
