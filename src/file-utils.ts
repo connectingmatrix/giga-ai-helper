@@ -40,9 +40,14 @@ export async function extractTextFromFile(file: BinaryFileLike): Promise<string>
   const extension = path.extname(String(file.originalname || '')).toLowerCase();
 
   if (file.mimetype === 'application/pdf' || extension === '.pdf') {
-    const pdfParse = new PDFParse({ data: file.buffer });
-    const pdfData = await pdfParse.getText();
-    return trim(String(pdfData.text || ''));
+    const parser = new PDFParse({ data: file.buffer });
+
+    try {
+      const pdfData = await parser.getText();
+      return trim(String(pdfData.text || ''));
+    } finally {
+      await parser.destroy();
+    }
   }
 
   if (
