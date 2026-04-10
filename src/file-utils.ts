@@ -11,8 +11,6 @@ import {
 } from './constants/mime';
 import { BinaryFileLike, MimeFileLike } from './types';
 
-PDFParse.setWorker(require.resolve('pdfjs-dist/legacy/build/pdf.worker.mjs'));
-
 export function getExtensionFromMimeType(
   file: MimeFileLike,
   mimeExtensionMap: Record<string, string> = DEFAULT_MIME_EXTENSION_MAP,
@@ -42,6 +40,7 @@ export async function extractTextFromFile(file: BinaryFileLike): Promise<string>
   const extension = path.extname(String(file.originalname || '')).toLowerCase();
 
   if (file.mimetype === 'application/pdf' || extension === '.pdf') {
+    await import('pdfjs-dist/legacy/build/pdf.worker.mjs');
     const parser = new PDFParse({ data: file.buffer });
 
     try {
