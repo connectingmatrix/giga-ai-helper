@@ -2,7 +2,7 @@ import path from 'path';
 
 import { trim } from 'lodash';
 import mammoth from 'mammoth';
-import { PDFParse } from 'pdf-parse';
+import { extractText, getDocumentProxy } from 'unpdf';
 
 import {
   DEFAULT_ALLOWED_EXTENSIONS,
@@ -40,15 +40,9 @@ export async function extractTextFromFile(file: BinaryFileLike): Promise<string>
   const extension = path.extname(String(file.originalname || '')).toLowerCase();
 
   if (file.mimetype === 'application/pdf' || extension === '.pdf') {
-    await import('pdfjs-dist/legacy/build/pdf.worker.mjs');
-    const parser = new PDFParse({ data: file.buffer });
-
-    try {
-      const pdfData = await parser.getText();
-      return trim(String(pdfData.text || ''));
-    } finally {
-      await parser.destroy();
-    }
+    const pdf = await getDocumentProxy(new Uint8Array(file.buffer));
+    const result = await extractText(pdf, { mergePages: true });
+    return trim(String(result.text || ''));
   }
 
   if (
